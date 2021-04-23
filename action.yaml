@@ -1,0 +1,32 @@
+name: .NET CDK
+description: Executes a CDK command on a .NET project
+author: JarradPosey(jarrad.posey@ausnetservices.com.au)
+inputs:
+  cdk_subcommand:
+    required: true
+    description: 'AWS CDK subcommand to execute.'
+  cdk_stack:
+    required: false
+    description: 'AWS CDK stack name to execute.'
+    default: '*'
+  cdk_args:
+    required: false
+    description: 'AWS CDK subcommand arguments.'
+  working_dir:
+    required: false
+    description: 'AWS CDK working directory.'
+    default: '.'
+  actions_comment:
+    required: false
+    description: 'Whether or not to comment on pull requests.'
+    default: 'true'
+  debug_log:
+    required: false
+    description: 'Enable debug-log'
+    default: 'false'
+outputs:
+  status_code:
+    description: 'Returned status code.'
+runs:
+  using: docker
+  image: Dockerfile

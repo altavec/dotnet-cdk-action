@@ -6,4 +6,5 @@ RUN apk --update --no-cache add nodejs nodejs-npm jq curl bash git && \
 
 COPY entrypoint.sh /entrypoint.sh
 
+RUN ["chmod", "+x", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]

@@ -6,8 +6,8 @@ set -u
 cd ${GITHUB_WORKSPACE}/${INPUT_WORKING_DIR}
 
 # Run cdk command
-echo "Run cdk ${INPUT_CDK_SUBCOMMAND} ${*} \"${INPUT_CDK_STACK}\" \"${INPUT_CDK_ARGS}\""
-output=$(cdk ${INPUT_CDK_SUBCOMMAND} ${*} "${INPUT_CDK_STACK}" "${INPUT_CDK_ARGS}")
+echo "Run cdk ${INPUT_CDK_SUBCOMMAND} ${INPUT_CDK_ARGS} \"${INPUT_CDK_STACK}\""
+output=$(cdk ${INPUT_CDK_SUBCOMMAND} ${INPUT_CDK_ARGS} "${INPUT_CDK_STACK}" 2>&1)
 exitCode=${?}
 echo ::set-output name=status_code::${exitCode}
 echo "${output}"

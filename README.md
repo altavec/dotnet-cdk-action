@@ -25,6 +25,14 @@ This GitHub action executes a command using the CDK CLI, from within a .NET SDK 
 
 * `status_code`: The returned status code of the cdk command.
 
+### Env
+
+* `AWS_ACCESS_KEY_ID` Required
+* `AWS_SECRET_ACCESS_KEY` Required
+* `GITHUB_TOKEN` Required for `actions_comment=true`
+
+Recommended to get AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY from secrets. A github token is automatically made available as a secret as GITHUB_TOKEN.
+
 ### Examples
 
 ```yaml
@@ -47,6 +55,8 @@ jobs:
         with:
           cdk_subcommand: diff
           actions_comment: true
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 ```
 
 ```yaml
@@ -68,16 +78,21 @@ jobs:
         uses: MondoPower/dotnet-cdk-action@v1
         with:
           cdk_subcommand: synth
+          actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ap-southeast-2
+
+      - name: Pack cloud artifact
+        run: |
+          zip -r cdk.zip ./cdk.out/**
       
       - name: Upload cloud artifact
         uses: actions/upload-artifact@v1
         with:
-          name: cdk.out
-          path: cdk.out
+          name: cdk.zip
+          path: cdk.zip
     
   deploy:
     runs-on: ubuntu-latest
@@ -92,6 +107,7 @@ jobs:
         with:
           cdk_subcommand: deploy
           cdk_args: --app cdk.out
+          actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

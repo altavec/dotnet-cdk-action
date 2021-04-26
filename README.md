@@ -100,13 +100,17 @@ jobs:
       - name: Download cloud artifact
         uses: actions/download-artifact@v1
         with:
-          name: cdk.out
+          name: cdk.zip
+
+      - name: Unpack cloud artifact
+        run: |
+          unzip cdk.zip
       
       - name: Deploy cloud artifact
         uses: MondoPower/dotnet-cdk-action@v1
         with:
           cdk_subcommand: deploy
-          cdk_args: --app cdk.out
+          cdk_args: --app cdk.out --require-approval never
           actions_comment: false
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}

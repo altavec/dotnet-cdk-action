@@ -25,9 +25,7 @@ if [ "$GITHUB_EVENT_NAME" == "pull_request" ] && [ "${INPUT_ACTIONS_COMMENT}" ==
 <details>
 <summary>Show Output</summary>
 <pre>
-<blockquote>
 ${output}
-</blockquote>
 </pre>
 </details>
 

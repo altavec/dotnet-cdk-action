@@ -24,6 +24,8 @@ This GitHub action executes a command using the CDK CLI, from within a .NET SDK 
 ### Outputs
 
 * `status_code`: The returned status code of the cdk command.
+* `json`: json representation of outputs from cloudformation stacks in format of { "StackName" : { "OutputName" : "OutputValue" } }
+* `${stack_name}-${output_name}`: output from cloudformation stack in format of ${stack_name}-${output_name}
 
 ### Env
 

@@ -7,6 +7,9 @@ cd ${GITHUB_WORKSPACE}/${INPUT_WORKING_DIR}
 
 OUTPUT_FILE="output.json"
 
+# output the CDK version
+echo "cdk version: $(cdk --version)"
+
 # Run cdk command
 echo "Run cdk ${INPUT_CDK_SUBCOMMAND} --outputs-file ${OUTPUT_FILE} ${INPUT_CDK_ARGS} \"${INPUT_CDK_STACK}\""
 output=$(cdk ${INPUT_CDK_SUBCOMMAND} --outputs-file ${OUTPUT_FILE} ${INPUT_CDK_ARGS} "${INPUT_CDK_STACK}" 2>&1)

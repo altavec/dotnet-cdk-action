@@ -1,6 +1,6 @@
 name: .NET CDK
 description: Executes a CDK command on a .NET project
-author: JarradPosey(jarrad.posey@ausnetservices.com.au)
+author: JarradPosey(jarrad.posey@altavec.com)
 inputs:
   cdk_subcommand:
     required: true

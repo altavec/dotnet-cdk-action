@@ -15,7 +15,7 @@ echo "Run cdk ${INPUT_CDK_SUBCOMMAND} --outputs-file ${OUTPUT_FILE} ${INPUT_CDK_
 output=$(cdk ${INPUT_CDK_SUBCOMMAND} --outputs-file ${OUTPUT_FILE} ${INPUT_CDK_ARGS} "${INPUT_CDK_STACK}" 2>&1)
 exitCode=${?}
 echo "status_code=${exitCode}" >> $GITHUB_OUTPUT
-echo "'${output}'"
+echo "cdk command complete"
 
 # If output file exists set outputs
 if test -f "${OUTPUT_FILE}"; then

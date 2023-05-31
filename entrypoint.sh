@@ -15,12 +15,13 @@ echo "Run cdk ${INPUT_CDK_SUBCOMMAND} --outputs-file ${OUTPUT_FILE} ${INPUT_CDK_
 output=$(cdk ${INPUT_CDK_SUBCOMMAND} --outputs-file ${OUTPUT_FILE} ${INPUT_CDK_ARGS} "${INPUT_CDK_STACK}" 2>&1)
 exitCode=${?}
 echo "status_code=${exitCode}" >> $GITHUB_OUTPUT
-echo "cdk command complete"
+echo "${output}"
 
 # If output file exists set outputs
 if test -f "${OUTPUT_FILE}"; then
-	json=$(jq -r . ${OUTPUT_FILE})
-	echo "json='${json}'" >> $GITHUB_OUTPUT
+	json=$(cat ${OUTPUT_FILE})
+	echo "json=${json}" >> $GITHUB_OUTPUT
+
 	cdk_output=$(jq '[leaf_paths as $path | { "key": $path | join("-"), "value": getpath($path) } ] | from_entries' ${OUTPUT_FILE})
 	for key in $(echo $cdk_output | jq -r 'keys[]');
 	do

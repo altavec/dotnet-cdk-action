@@ -19,9 +19,9 @@ echo "${output}"
 
 # If output file exists set outputs
 if test -f "${OUTPUT_FILE}"; then
-	json=$(cat ${OUTPUT_FILE})
-	echo "json=${json}" >> $GITHUB_OUTPUT
-
+	json=$(jq -r . ${OUTPUT_FILE})
+	json_string=$(echo "${json}" | jq tostring)
+	echo "json=${json_string}" >> $GITHUB_OUTPUT
 	cdk_output=$(jq '[leaf_paths as $path | { "key": $path | join("-"), "value": getpath($path) } ] | from_entries' ${OUTPUT_FILE})
 	for key in $(echo $cdk_output | jq -r 'keys[]');
 	do

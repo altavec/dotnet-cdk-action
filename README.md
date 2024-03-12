@@ -50,10 +50,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build cloud artifact
-        uses: MondoPower/dotnet-cdk-action@v1
+        uses: altavec/dotnet-cdk-action@v1
         with:
           cdk_subcommand: diff
           actions_comment: true
@@ -74,10 +74,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build cloud artifact
-        uses: MondoPower/dotnet-cdk-action@v1
+        uses: altavec/dotnet-cdk-action@v1
         with:
           cdk_subcommand: synth
           actions_comment: false
@@ -100,7 +100,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download cloud artifact
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v4
         with:
           name: cdk.zip
 
@@ -109,7 +109,7 @@ jobs:
           unzip cdk.zip
       
       - name: Deploy cloud artifact
-        uses: MondoPower/dotnet-cdk-action@v1
+        uses: altavec/dotnet-cdk-action@v1
         with:
           cdk_subcommand: deploy
           cdk_args: --app cdk.out --require-approval never

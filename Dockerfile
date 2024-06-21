@@ -15,3 +15,5 @@ RUN apk --update --no-cache add nodejs npm jq curl bash git && \
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
+
+LABEL org.opencontainers.image.source="https://github.com/altavec/dotnet-cdk-action"
